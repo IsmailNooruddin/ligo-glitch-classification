@@ -1,0 +1,29 @@
+# Virtual Environment
+venv/
+env/
+.env
+
+# Large Datasets & Heavy Checkpoints (>50MB)
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.onnx
+
+# Keep lightweight trained Random Forest model (4.6 MB) in repo for teammates/demo
+*.joblib
+!outputs/models/rf_best_model.joblib
+
+# Python & Jupyter Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+.pytest_cache/
+.ipython/
+.jupyter*/
+
+# OS & OneDrive specific
+Thumbs.db
+.DS_Store
+desktop.ini

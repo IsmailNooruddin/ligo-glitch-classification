@@ -1,0 +1,5 @@
+Model,Accuracy (%),Macro-F1,Weighted-F1,Description
+Baseline 1: Majority Class,28.71,0.0319,0.1281,Always predicts 'Blip' (most common training class)
+Baseline 2: Raw-Pixel Decision Tree,82.75,0.7315,0.8394,"Decision Tree (max_depth=10) on 23,800 raw pixels (overfitting on pixel noise)"
+Feature-Based Decision Tree,91.59,0.8536,0.9152,"Tuned Decision Tree (max_depth=15, class_weight=None) on 34 engineered features"
+Feature-Based Random Forest,97.06,0.9376,0.9699,"Tuned Random Forest (n_est=50, max_depth=None, class_weight=None) on 34 engineered features"

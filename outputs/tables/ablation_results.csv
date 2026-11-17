@@ -1,0 +1,8 @@
+Experiment,Num_Features,Accuracy (%),Macro-F1,Weighted-F1,Delta_Macro_F1,Description
+Full Feature Set (Reference),34,97.06,0.9376,0.9699,0.0,All 34 features (20 spectrogram + 14 Omicron metadata)
+Drop Temporal Group,28,95.9,0.914,0.9575,-0.0236,"Ablates duration, peak time, temporal centroid, active duration bins (28 features remaining)"
+Drop Frequency Group,20,94.95,0.898,0.948,-0.0396,"Ablates peak/central frequency, bandwidth, spectral centroid/spread/skewness, sub-bands (20 features remaining)"
+Drop Energy / SNR Group,25,95.79,0.9228,0.9564,-0.0149,"Ablates SNR, amplitude, peak/mean energy, energy contrast, energy concentration (25 features remaining)"
+Drop Morphology Group,29,97.27,0.9454,0.972,0.0078,"Ablates aspect ratio, persistence, active pixel ratio, Q-factor approx (29 features remaining)"
+Modality: Spectrogram Only,20,93.59,0.8855,0.9351,-0.0521,Drops all 14 Omicron trigger metadata features (20 spectrogram features remaining)
+Modality: Metadata Only,14,91.38,0.8177,0.9064,-0.12,Drops all 20 spectrogram array features (14 Omicron metadata features remaining)
