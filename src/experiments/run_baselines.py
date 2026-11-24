@@ -1,15 +1,4 @@
-"""
-Module: run_baselines.py
-Purpose: Experiment script to evaluate Baseline 1 (Majority Class) and Baseline 2 (Raw-Pixel Decision Tree).
-Author: L4 Group 23 (Ismail Nooruddin, Munir Tariq, Ramsha Arshad)
 
-Why this experiment is essential:
-Establishes the empirical lower-bound baselines outlined in our Project Proposal:
-1. Baseline 1 (Majority Class): Always guesses 'Blip'. Proves accuracy is misleading under severe imbalance.
-2. Baseline 2 (Raw-Pixel Decision Tree): Trains directly on flattened 23,800 raw pixel values.
-   Demonstrates the curse of dimensionality, extreme memorization/overfitting on pixel noise,
-   and poor generalization without feature engineering or convolutions.
-"""
 
 import os
 import sys
