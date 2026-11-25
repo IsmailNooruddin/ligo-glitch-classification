@@ -1,0 +1,41 @@
+Model,Direction,Seed,Accuracy (%),Macro_F1,Weighted_F1
+Feature Random Forest,H1->H1,42,96.7,0.9409,0.9665
+Feature Random Forest,H1->L1,42,76.66,0.622,0.7369
+Feature Random Forest,L1->L1,42,95.76,0.9186,0.9555
+Feature Random Forest,L1->H1,42,83.48,0.7032,0.8216
+Adapted Gravity Spy CNN,H1->H1,42,95.3,0.9231,0.954
+Adapted Gravity Spy CNN,H1->L1,42,85.41,0.7521,0.8671
+Adapted Gravity Spy CNN,L1->L1,42,93.63,0.9117,0.9362
+Adapted Gravity Spy CNN,L1->H1,42,84.7,0.734,0.8382
+Feature Random Forest,H1->H1,43,96.87,0.9452,0.9674
+Feature Random Forest,H1->L1,43,79.58,0.6449,0.7711
+Feature Random Forest,L1->L1,43,96.02,0.8893,0.9564
+Feature Random Forest,L1->H1,43,81.22,0.708,0.7989
+Adapted Gravity Spy CNN,H1->H1,43,93.74,0.8582,0.9344
+Adapted Gravity Spy CNN,H1->L1,43,85.15,0.7328,0.8609
+Adapted Gravity Spy CNN,L1->L1,43,95.23,0.9286,0.9527
+Adapted Gravity Spy CNN,L1->H1,43,75.83,0.6739,0.771
+Feature Random Forest,H1->H1,44,96.87,0.9403,0.9672
+Feature Random Forest,H1->L1,44,77.45,0.6581,0.7486
+Feature Random Forest,L1->L1,44,95.76,0.9351,0.9562
+Feature Random Forest,L1->H1,44,82.09,0.7189,0.8045
+Adapted Gravity Spy CNN,H1->H1,44,96.35,0.9306,0.9622
+Adapted Gravity Spy CNN,H1->L1,44,80.9,0.7126,0.8309
+Adapted Gravity Spy CNN,L1->L1,44,95.23,0.8986,0.951
+Adapted Gravity Spy CNN,L1->H1,44,86.78,0.7561,0.8595
+Feature Random Forest,H1->H1,45,96.7,0.9272,0.9667
+Feature Random Forest,H1->L1,45,74.8,0.6182,0.7326
+Feature Random Forest,L1->L1,45,94.16,0.9015,0.94
+Feature Random Forest,L1->H1,45,82.43,0.7241,0.8082
+Adapted Gravity Spy CNN,H1->H1,45,94.43,0.9041,0.9464
+Adapted Gravity Spy CNN,H1->L1,45,82.23,0.71,0.8387
+Adapted Gravity Spy CNN,L1->L1,45,94.69,0.9361,0.9483
+Adapted Gravity Spy CNN,L1->H1,45,77.91,0.6657,0.7831
+Feature Random Forest,H1->H1,46,96.35,0.9109,0.9617
+Feature Random Forest,H1->L1,46,77.98,0.6345,0.742
+Feature Random Forest,L1->L1,46,95.49,0.8407,0.9454
+Feature Random Forest,L1->H1,46,83.13,0.6965,0.8137
+Adapted Gravity Spy CNN,H1->H1,46,94.43,0.8895,0.943
+Adapted Gravity Spy CNN,H1->L1,46,86.74,0.771,0.8803
+Adapted Gravity Spy CNN,L1->L1,46,95.23,0.9004,0.9511
+Adapted Gravity Spy CNN,L1->H1,46,85.39,0.718,0.8496

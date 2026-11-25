@@ -1,0 +1,5 @@
+Category,Count,Percentage (%)
+Both RF & CNN Correct,907,95.37
+"RF Correct, CNN Wrong (Physics Features Win)",16,1.68
+"CNN Correct, RF Wrong (2D Vision Wins)",14,1.47
+Both RF & CNN Wrong (Hard / Ambiguous Glitches),14,1.47

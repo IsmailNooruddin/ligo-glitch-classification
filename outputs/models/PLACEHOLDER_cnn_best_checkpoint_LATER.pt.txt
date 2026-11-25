@@ -1,2 +1,0 @@
-# PLACEHOLDER: cnn_best_checkpoint_LATER.pt
-# The best-performing trained PyTorch CNN weights will be saved here via torch.save().

@@ -1,0 +1,29 @@
+Model,Class,H1->H1,H1->H1_std,H1->L1,H1->L1_std,L1->L1,L1->L1_std,L1->H1,L1->H1_std
+Feature Random Forest,Blip,0.977,0.0043,0.8883,0.0323,0.9477,0.0198,0.8728,0.0159
+Feature Random Forest,Chirp,0.8571,0.1565,0.3976,0.2533,0.7732,0.0585,0.5717,0.1669
+Feature Random Forest,Extremely_Loud,0.9927,0.0098,0.9144,0.0207,0.9819,0.0113,0.8857,0.0365
+Feature Random Forest,Koi_Fish,0.9734,0.0122,0.9354,0.0288,0.9895,0.0086,0.9144,0.0159
+Feature Random Forest,Low_Frequency_Burst,0.9513,0.0216,0.8408,0.0268,0.9444,0.0257,0.901,0.0285
+Feature Random Forest,Low_Frequency_Lines,0.947,0.0513,0.8969,0.0242,0.93,0.0262,0.9263,0.047
+Feature Random Forest,No_Glitch,0.9029,0.0502,0.3898,0.0608,0.8478,0.0867,0.7506,0.1239
+Feature Random Forest,None_of_the_Above,0.7631,0.1323,0.05,0.1,0.7798,0.1171,0.0,0.0
+Feature Random Forest,Power_Line,1.0,0.0,0.9734,0.0097,0.9962,0.0076,0.7765,0.0723
+Feature Random Forest,Repeating_Blips,0.8791,0.0305,0.2476,0.2201,0.4452,0.259,0.1442,0.0635
+Feature Random Forest,Scattered_Light,0.9895,0.0102,0.9695,0.0403,1.0,0.0,0.8707,0.0168
+Feature Random Forest,Scratchy,0.9451,0.0385,0.7263,0.0138,0.9946,0.0066,0.7553,0.0746
+Feature Random Forest,Tomte,0.8873,0.0794,0.6036,0.2321,0.9329,0.0341,0.6773,0.0989
+Feature Random Forest,Violin_Mode,0.9951,0.0098,0.0637,0.0667,0.9951,0.006,0.896,0.0204
+Adapted Gravity Spy CNN,Blip,0.9801,0.005,0.9275,0.0153,0.9729,0.0101,0.9166,0.0506
+Adapted Gravity Spy CNN,Chirp,1.0,0.0,0.4285,0.1166,1.0,0.0,0.7758,0.1883
+Adapted Gravity Spy CNN,Extremely_Loud,0.9047,0.0232,0.755,0.1681,0.9356,0.0093,0.6511,0.0414
+Adapted Gravity Spy CNN,Koi_Fish,0.9606,0.0127,0.9226,0.0283,0.9511,0.0379,0.8108,0.0775
+Adapted Gravity Spy CNN,Low_Frequency_Burst,0.9069,0.0275,0.8537,0.0379,0.9264,0.0182,0.8383,0.0471
+Adapted Gravity Spy CNN,Low_Frequency_Lines,0.8535,0.0452,0.875,0.0233,0.9355,0.0225,0.8152,0.0169
+Adapted Gravity Spy CNN,No_Glitch,0.7339,0.0456,0.3876,0.0581,0.6792,0.0575,0.6279,0.0272
+Adapted Gravity Spy CNN,None_of_the_Above,0.6058,0.2211,0.04,0.08,0.8076,0.123,0.0,0.0
+Adapted Gravity Spy CNN,Power_Line,0.9928,0.0096,0.9025,0.0718,0.9889,0.009,0.9904,0.0089
+Adapted Gravity Spy CNN,Repeating_Blips,0.8962,0.0176,0.5736,0.1091,0.7087,0.2361,0.3856,0.0957
+Adapted Gravity Spy CNN,Scattered_Light,0.9804,0.0174,0.959,0.0377,0.9777,0.0274,0.9696,0.0218
+Adapted Gravity Spy CNN,Scratchy,0.9692,0.0155,0.9395,0.0178,0.9973,0.0055,0.8545,0.0373
+Adapted Gravity Spy CNN,Tomte,0.9009,0.0286,0.8129,0.099,0.9351,0.0563,0.6993,0.129
+Adapted Gravity Spy CNN,Violin_Mode,0.9306,0.0398,0.9219,0.0967,0.9951,0.006,0.5985,0.0977

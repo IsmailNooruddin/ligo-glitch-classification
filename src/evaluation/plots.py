@@ -165,22 +165,31 @@ def plot_ablation_impact(ablation_df, baseline_macro_f1=0.9376, save_path=None):
 def plot_per_class_f1_comparison(per_class_df, save_path=None):
     """
     Plots a grouped horizontal bar chart comparing per-class F1 scores across
-    Raw-Pixel Decision Tree, Feature Decision Tree, and Feature Random Forest.
+    Raw-Pixel Decision Tree, Feature Decision Tree, Adapted CNN (if present), and Feature Random Forest.
     """
     df_sorted = per_class_df.sort_values(by='Random_Forest_F1', ascending=True).reset_index(drop=True)
     y = np.arange(len(df_sorted))
-    height = 0.26
+    has_cnn = 'CNN_1s_F1' in df_sorted.columns
 
-    fig, ax = plt.subplots(figsize=(12, 9))
-    ax.barh(y - height, df_sorted['Raw_Pixel_Tree_F1'], height, label='Baseline 2: Raw-Pixel Tree (23,800 dims)', color='#d62728', alpha=0.82, edgecolor='black')
-    ax.barh(y, df_sorted['Feature_Tree_F1'], height, label='Model 1: Feature Decision Tree (34 dims)', color='#ff7f0e', alpha=0.85, edgecolor='black')
-    ax.barh(y + height, df_sorted['Random_Forest_F1'], height, label='Model 2: Feature Random Forest (34 dims)', color='#2ca02c', alpha=0.88, edgecolor='black')
+    fig, ax = plt.subplots(figsize=(13, 10 if has_cnn else 9))
+    if has_cnn:
+        h = 0.20
+        ax.barh(y - 1.5 * h, df_sorted['Raw_Pixel_Tree_F1'], h, label='Baseline 2: Raw-Pixel Tree (23,800 dims)', color='#d62728', alpha=0.82, edgecolor='black')
+        ax.barh(y - 0.5 * h, df_sorted['Feature_Tree_F1'], h, label='Model 1: Feature Decision Tree (34 dims)', color='#ff7f0e', alpha=0.85, edgecolor='black')
+        ax.barh(y + 0.5 * h, df_sorted['CNN_1s_F1'], h, label='Model 3: Adapted Gravity Spy CNN (1.0s)', color='#1f77b4', alpha=0.88, edgecolor='black')
+        ax.barh(y + 1.5 * h, df_sorted['Random_Forest_F1'], h, label='Model 2: Feature Random Forest (34 dims)', color='#2ca02c', alpha=0.88, edgecolor='black')
+        ax.set_title("Per-Class F1-Score Comparison: Raw Pixels vs. Trees vs. Adapted Gravity Spy CNN", fontsize=13, fontweight='bold', pad=12)
+    else:
+        height = 0.26
+        ax.barh(y - height, df_sorted['Raw_Pixel_Tree_F1'], height, label='Baseline 2: Raw-Pixel Tree (23,800 dims)', color='#d62728', alpha=0.82, edgecolor='black')
+        ax.barh(y, df_sorted['Feature_Tree_F1'], height, label='Model 1: Feature Decision Tree (34 dims)', color='#ff7f0e', alpha=0.85, edgecolor='black')
+        ax.barh(y + height, df_sorted['Random_Forest_F1'], height, label='Model 2: Feature Random Forest (34 dims)', color='#2ca02c', alpha=0.88, edgecolor='black')
+        ax.set_title("Per-Class F1-Score Progression: Raw Pixels vs. Engineered Feature Models", fontsize=13, fontweight='bold', pad=12)
 
     ax.set_yticks(y)
     ax.set_yticklabels(df_sorted['Class'], fontsize=10, fontweight='bold')
     ax.set_xlim(0.0, 1.08)
     ax.set_xlabel("Test Set F1-Score", fontsize=11, fontweight='bold')
-    ax.set_title("Per-Class F1-Score Progression: Raw Pixels vs. Engineered Feature Models", fontsize=13, fontweight='bold', pad=12)
     ax.grid(axis='x', linestyle='--', alpha=0.6)
     ax.legend(loc='lower right', fontsize=10, frameon=True)
     plt.tight_layout()
