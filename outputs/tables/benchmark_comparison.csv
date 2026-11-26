@@ -4,3 +4,7 @@ Baseline 2: Raw-Pixel Decision Tree,82.75,0.7315,0.8394,"Decision Tree (max_dept
 Feature-Based Decision Tree,91.59,0.8536,0.9152,"Tuned Decision Tree (max_depth=15, class_weight=None) on 34 engineered features"
 Feature-Based Random Forest,97.06,0.9376,0.9699,"Tuned Random Forest (n_est=50, max_depth=None, class_weight=None) on 34 engineered features"
 Adapted Gravity Spy CNN (1.0s),96.85,0.9466,0.9682,4-block PyTorch CNN (adapted Glanzer et al. 2023) on 1.0s spectrograms with smoothed class weights
+ResNet-18 (1.0s Single-View),97.27,0.9543,0.9727,"ImageNet-pretrained ResNet-18 fine-tuned on 1.0s spectrograms (11.2M params, T4 GPU)"
+ResNet-18 (Multi-View RGB),97.16,0.9512,0.9716,"ImageNet-pretrained ResNet-18 with [0.5s, 1.0s, 2.0s] mapped to [R, G, B] channels (11.2M params)"
+ConvNeXt-Tiny (Multi-View RGB),97.69,0.9606,0.9769,"ImageNet-pretrained ConvNeXt-Tiny on Multi-View RGB spectrograms (27.8M params, highest Val F1=0.9604)"
+ViT-B/16 (Multi-View RGB),97.79,0.9608,0.9783,"ImageNet-pretrained Vision Transformer ViT-B/16 on Multi-View RGB spectrograms (85.8M params, Best Test Macro-F1)"

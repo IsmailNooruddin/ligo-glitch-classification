@@ -1,0 +1,9 @@
+Category,Count,Percentage (%)
+All 3 Models Correct (RF & CNN & ViT),900,94.64
+"RF & ViT Correct, 4-Layer CNN Wrong",9,0.95
+"CNN & ViT Correct, RF Wrong",14,1.47
+ViT ONLY Correct (Rescues Both RF & CNN),7,0.74
+"RF & CNN Correct, ViT Wrong",7,0.74
+RF ONLY Correct (Beats Both CNN & ViT),7,0.74
+4-Layer CNN ONLY Correct,0,0.0
+All 3 Models Wrong (Hardcore / Label-Ambiguous),7,0.74

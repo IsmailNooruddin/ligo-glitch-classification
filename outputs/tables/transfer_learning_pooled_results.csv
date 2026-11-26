@@ -1,0 +1,5 @@
+Model,Backbone,Input_Mode,Params,Val_Macro_F1,Accuracy (%),Macro-F1,Weighted-F1,Train_Time_Sec
+ResNet-18 (1.0s Single-View),resnet18,1.0s,11183694,0.9459,97.27,0.9543,0.9727,118.5
+ResNet-18 (Multi-View RGB),resnet18,rgb_3view,11183694,0.9469,97.16,0.9512,0.9716,148.2
+ConvNeXt-Tiny (Multi-View RGB),convnext_tiny,rgb_3view,27830894,0.9604,97.69,0.9606,0.9769,475.2
+ViT-B/16 (Multi-View RGB),vit_b_16,rgb_3view,85809422,0.9486,97.79,0.9608,0.9783,794.5

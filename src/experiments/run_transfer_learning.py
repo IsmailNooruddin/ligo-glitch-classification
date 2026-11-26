@@ -320,10 +320,13 @@ def train_transfer_model(
 
 def plot_transfer_benchmark(transfer_df, baseline_csv_path, save_path):
     """Plots full leaderboard comparing Steps 7-12 models vs Step 15 Pretrained Transfer Backbones."""
+    transfer_names = set(transfer_df["Model"].tolist())
     rows = []
     if os.path.exists(baseline_csv_path):
         base_df = pd.read_csv(baseline_csv_path)
         for _, r in base_df.iterrows():
+            if r["Model"] in transfer_names:
+                continue
             rows.append({
                 "Model": r["Model"],
                 "Macro_F1": float(r["Macro-F1"]),
@@ -339,7 +342,7 @@ def plot_transfer_benchmark(transfer_df, baseline_csv_path, save_path):
         })
 
     plot_df = pd.DataFrame(rows)
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(12.5, 6))
     colors = ["#7f7f7f" if g == "Prior" else "#1f77b4" for g in plot_df["Group"]]
     bars = ax.barh(plot_df["Model"], plot_df["Macro_F1"], color=colors, edgecolor="black", alpha=0.88)
 
@@ -347,7 +350,7 @@ def plot_transfer_benchmark(transfer_df, baseline_csv_path, save_path):
         w = bar.get_width()
         ax.text(w + 0.008, bar.get_y() + bar.get_height() / 2, f"{w:.4f} ({acc:.1f}% acc)", va="center", fontsize=9, fontweight="bold")
 
-    ax.set_xlim(0.0, 1.12)
+    ax.set_xlim(0.0, 1.24)
     ax.set_xlabel("Unseen Test Macro-F1 Score (Primary Metric)", fontsize=11, fontweight="bold")
     ax.set_title("Step 15 Benchmark: Prior Baselines & CNN vs. Modern Pretrained Vision Backbones", fontsize=12.5, fontweight="bold", pad=12)
     ax.grid(axis="x", linestyle="--", alpha=0.6)
