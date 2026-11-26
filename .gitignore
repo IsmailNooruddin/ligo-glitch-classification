@@ -27,3 +27,8 @@ __pycache__/
 Thumbs.db
 .DS_Store
 desktop.ini
+
+# Result Archives (Colab zip downloads)
+*.zip
+step15_results.zip
+step16_results.zip
