@@ -11,64 +11,57 @@
 ---
 
 ## 1. Project Overview
-This project classifies transient noise artifacts ("glitches") in LIGO gravitational-wave detectors using the Gravity Spy public dataset (Zenodo record `1486046`). We systematically compare **interpretable feature-engineered models (Decision Trees, Random Forests)**, an **adapted reproduction of the Gravity Spy Convolutional Neural Network (CNN)**, **modern ImageNet-pretrained Vision Transfer Learning backbones (`ResNet-18`, `ConvNeXt-Tiny`, `ViT-B/16`) using Multi-View RGB `[0.5s, 1.0s, 2.0s]` spectrograms**, and **Vision-Language Models (`OpenAI CLIP ViT-B/16` via Zero-Shot Physics Prompting, Frozen Embedding Probes, and Prompt-Initialized Fine-Tuning)**, while evaluating both zero-shot and few-shot bidirectional domain adaptation across physical detector sites (**Option B: Cross-Detector Testing** between Hanford `H1` and Livingston `L1`).
-
-## 2. Core Methodological Pillars
-1. **Option B (Cross-Detector Transfer & Few-Shot Adaptation):** Filtered the dataset to **14 shared glitch classes** ($\ge 25$ samples at both `H1` and `L1`, retaining $6,340$ glitches / $79.59\%$ of the dataset) and evaluated zero-shot transfer and target-site few-shot adaptation (`0%, 5%, 10%, 20%` vs `100%` Native) in both directions ($H1 \leftrightarrow L1$) across **5 random seeds (`42–46`)**.
-2. **Leak-Free Grouped Splitting:** Strictly partitioned glitches by `gravityspy_id` ($70\%$ Train / $15\%$ Val / $15\%$ Test) so all four duration zoom views ($0.5\text{s}, 1.0\text{s}, 2.0\text{s}, 4.0\text{s}$) remain in the exact same partition.
-3. **Multi-Paradigm Representation Comparison:** Controlled comparison across **34 physically motivated features** ($20$ spectrogram + $14$ Omicron metadata), **scratch CNN**, **ImageNet-1K pretrained vision models (`ResNet-18`, `ConvNeXt-Tiny`, `ViT-B/16`)**, and **WIT-400M Vision-Language pretraining (`OpenAI CLIP ViT-B/16`)**.
-4. **Rigorous Evaluation, Ablations & 4-Way Failure Analysis:** Reported unweighted **Macro-F1**, per-class F1 scores, Top-3 VLM recall, Permutation & MDI feature importances, 7 systematic feature ablations, and 4-way model complementarity (`RF` vs. `4-Layer CNN` vs. `ImageNet ViT-B/16` vs. `CLIP ViT-B/16`).
+This project classifies transient noise artifacts ("glitches") in LIGO gravitational-wave detectors using the Gravity Spy public dataset (Zenodo record `1486046`). We systematically benchmark **five distinct AI paradigms** on identical leak-free partitions:
+1. **Classical Feature Engineering** (Decision Trees & Random Forests on `34` physical Omicron + spectrogram features),
+2. **Scratch Deep Learning** (Adapted Gravity Spy 4-layer PyTorch CNN on `1.0s` spectrograms),
+3. **Modern Vision Transfer Learning** (ImageNet-pretrained `ResNet-18`, `ConvNeXt-Tiny`, `ViT-B/16` with Multi-View RGB `[0.5s, 1.0s, 2.0s]`),
+4. **Vision-Language Models** (`OpenAI CLIP ViT-B/16` via Zero-Shot Physics Prompting, Frozen Embedding Probes, and Prompt-Initialized Fine-Tuning), and
+5. **Multimodal Physics–Vision Hybrid Fusion** (combining `34` physical Omicron/spectrogram features with frozen CLIP embeddings and calibrated ImageNet `ViT-B/16` predictions), alongside bidirectional **5-Seed Cross-Detector Transfer & Few-Shot Adaptation (`H1 ↔ L1`)**.
 
 ---
 
-## 3. Pooled Benchmark Summary (Unseen Test Set, $N = 951$, Seed 42)
+## 2. Grand Finale Pooled Leaderboard (Unseen Test Set, $N = 951$, Seed 42)
 
 | Model | Paradigm / Input | Test Accuracy (%) | **Test Macro-F1** | Weighted-F1 |
 | :--- | :---: | :---: | :---: | :---: |
 | **Baseline 1: Majority Class** | Constant (`Blip`) | $28.71\%$ | $0.0319$ | $0.1281$ |
 | **Baseline 2: Raw-Pixel Decision Tree** | $23,800$ raw pixels (`1.0s`) | $82.75\%$ | $0.7315$ | $0.8394$ |
-| **Model 1: Feature Decision Tree** | $34$ engineered features | $91.59\%$ | $0.8536$ | $0.9152$ |
-| **Model 2: Feature Random Forest** | $34$ engineered features | $97.06\%$ | $0.9376$ | $0.9699$ |
+| **Model 1: Feature Decision Tree** | $34$ physical features | $91.59\%$ | $0.8536$ | $0.9152$ |
+| **Model 2: Feature Random Forest** | $34$ physical features | $97.06\%$ | $0.9376$ | $0.9699$ |
 | **Model 3: Adapted Gravity Spy CNN (1.0s)** | Scratch CNN `(1, 140, 170)` | $96.85\%$ | $0.9466$ | $0.9682$ |
-| **Model 4: ResNet-18 (1.0s Single-View)** | ImageNet Transfer (`1.0s`) | $97.27\%$ | $0.9543$ | $0.9727$ |
-| **Model 5: ResNet-18 (Multi-View RGB)** | ImageNet Transfer (`RGB`) | $97.16\%$ | $0.9512$ | $0.9716$ |
-| **Model 6: ConvNeXt-Tiny (Multi-View RGB)** | ImageNet Transfer (`RGB`) | $97.69\%$ | $0.9606$ | $0.9769$ |
-| **Model 7: ViT-B/16 (Multi-View RGB)** | ImageNet Transfer (`RGB`) | **$97.79\%$** | **$0.9608$** | **$0.9783$** |
-| **Model 8a: CLIP ViT-B/16 Zero-Shot (Basic)** | VLM Text Only (`0` train imgs) | $6.94\%$ | $0.0134$ | $0.0117$ |
-| **Model 8b: CLIP ViT-B/16 Zero-Shot (Physics)** | VLM Physics Prompts (`Top-3=64.5%`) | $26.08\%$ | $0.1388$ | $0.2355$ |
-| **Model 8c: CLIP ViT-B/16 Zero-Shot (Viridis)** | VLM Physics Prompts (`1.0s` Viridis) | $18.40\%$ | $0.1025$ | $0.1259$ |
-| **Model 9: CLIP ViT-B/16 Frozen Linear Probe** | Frozen VLM + LogReg (`7.2K` params) | $94.32\%$ | $0.9060$ | $0.9431$ |
-| **Model 10: CLIP ViT-B/16 Frozen MLP Probe** | Frozen VLM + 2-Layer MLP (`9.4s`) | $95.37\%$ | $0.9271$ | $0.9537$ |
-| **Model 11: CLIP ViT-B/16 Fine-Tuned (Text-Init)** | Prompt-Init VLM Fine-Tune (`RGB`) | $96.95\%$ | $0.9474$ | $0.9697$ |
+| **Model 4: CLIP Zero-Shot (Basic → Physics)** | VLM Text Only (`0` train imgs) | $6.94\% \to 26.08\%$ | $0.0134 \to 0.1388$ | $0.0117 \to 0.2355$ |
+| **Model 5: CLIP Frozen MLP Probe** | Frozen VLM + MLP (`9.4s`) | $95.37\%$ | $0.9271$ | $0.9537$ |
+| **Model 6: CLIP Fine-Tuned (Text-Init, RGB)** | Prompt-Init VLM FT (`RGB`) | $96.95\%$ | $0.9474$ | $0.9697$ |
+| **Model 7: ResNet-18 (1.0s / Multi-View RGB)** | ImageNet Transfer | $97.27\%$ / $97.16\%$ | $0.9543$ / $0.9512$ | $0.9727$ / $0.9716$ |
+| **Model 8: ConvNeXt-Tiny (Multi-View RGB)** | ImageNet Transfer (`RGB`) | $97.69\%$ | $0.9606$ | $0.9769$ |
+| **Model 9: ViT-B/16 (Multi-View RGB)** | ImageNet Transfer (`RGB`) | $97.79\%$ | $0.9608$ | $0.9783$ |
+| **Model 10: Bi-Modal Late Fusion (RF + ViT)** | Calibrated Late Fusion | $97.90\%$ | $0.9649$ | $0.9788$ |
+| **Model 11: Early Fusion MLP (Frozen CLIP + 34 Physics)** | **0 GPU Fine-Tuning!** | $97.79\%$ | $0.9671$ | $0.9780$ |
+| **Model 12: Tri-Modal Late Fusion (RF + ViT + CLIP)** | Calibrated Tri-Modal Fusion | $98.21\%$ | $0.9684$ | $0.9819$ |
+| **CHAMPION: Hybrid Fusion (Early Physics-CLIP + ViT-B/16)** | **Early + Late Multimodal** | **$98.53\%$** (`14` errs) | **$0.9736$** | **$0.9852$** |
 
-*Key Pooled Breakthroughs:*
-- **ImageNet vs. CLIP Showdown (`ViT-B/16`):** Both ImageNet `ViT-B/16` (`0.9608`) and Text-Init `CLIP ViT-B/16` (`0.9474`) beat both RF (`0.9376`) and the 4-layer scratch CNN (`0.9466`). ImageNet pretraining outperforms CLIP by `+0.0134` on fine low-SNR pixel textures (`No_Glitch`, `Repeating_Blips`), while physics prompt engineering boosts zero-shot CLIP **`10.4×`** (`0.0134 → 0.1388`, **`64.46%` Top-3 accuracy** with `0` training images!).
-- **4-Model Complementarity Ceiling:** Combining `RF` + `ImageNet ViT-B/16` + `CLIP ViT-B/16` yields a **`99.37%` (`945/951`) Oracle Fusion Ceiling**, leaving only **`6` unanimously label-ambiguous glitches (`0.63%`)**.
-
-## 4. Option B: Bidirectional Cross-Detector Transfer & Few-Shot Recovery (5-Seed Mean ± Std)
-
-### 4A. Zero-Shot Cross-Detector Transfer (`0%` Target-Site Labels)
-| Model | `H1 → H1` (Within) | `H1 → L1` (Zero-Shot) | `L1 → L1` (Within) | `L1 → H1` (Zero-Shot) |
-| :--- | :---: | :---: | :---: | :---: |
-| **Feature Random Forest (34 feats)** | $0.9329 \pm 0.0125$ | $0.6355 \pm 0.0147$ | $0.8970 \pm 0.0321$ | $0.7101 \pm 0.0101$ |
-| **Frozen CLIP ViT-B/16 Linear Probe** | $0.8709 \pm 0.0183$ | $0.6806 \pm 0.0289$ | $0.8988 \pm 0.0236$ | $0.7063 \pm 0.0229$ |
-| **Adapted Gravity Spy CNN (1.0s)** | $0.9011 \pm 0.0258$ | $0.7357 \pm 0.0233$ | $0.9151 \pm 0.0150$ | $0.7095 \pm 0.0347$ |
-| **Pretrained ResNet-18 (Multi-View RGB)** | $0.9306 \pm 0.0322$ | **$0.8512 \pm 0.0322$** | **$0.9509 \pm 0.0117$** | **$0.7805 \pm 0.0276$** |
-
-### 4B. Few-Shot Target-Detector Domain Adaptation (`H1 ↔ L1`, 5 Seeds)
-| Adaptation Stage | Target Glitches (`L1` / `H1`) | **Step 15 Fine-Tuned ResNet-18 (`H1→L1` / `L1→H1`)** | **Step 16 Frozen CLIP Probe (`H1→L1` / `L1→H1`)** |
-| :--- | :---: | :---: | :---: |
-| **`0%` (Source Only)** | `0` / `0` | $0.8512$ / $0.7805$ | $0.6806$ / $0.7063$ |
-| **`5%` Target Data** | `88` / `134` | $0.8929$ / $0.8342$ | $0.7589$ / $0.7736$ |
-| **`10%` Target Data** | `176` / `268` | $0.9168$ / $0.8609$ | $0.8082$ / $0.7921$ |
-| **`20%` Target Data** | `351` / `536` | **$0.9426$ / $0.8742$** | $0.8148$ / $0.7748$ |
-| **`100%` Native Target** | `1,755` / `2,681` | $0.9509$ / $0.9306$ | $0.8988$ / $0.8709$ |
-
-*Key Cross-Detector Discovery:* Feature RF collapses on `H1 → L1` (`0.6355`) due to `Violin_Mode` harmonic frequency shift (`0.9951 → 0.0637`). Even a **completely frozen** CLIP linear probe beats RF zero-shot (`0.6806`) and hits `0.8148` with `20%` target labels in seconds on CPU, while fine-tuning `ResNet-18 (Multi-View RGB)` jumps to **`0.8512`** zero-shot and recovers **`91.7%`** of the entire `H1 → L1` domain gap with just **`20%`** (`351`) Livingston glitches (`0.9426` vs. `0.9509` native)!
+*Headline Scientific Discoveries:*
+- **Multimodal Hybrid Fusion Breaks All Records (`0.9736` Macro-F1, `98.53%` Accuracy):** Combining `34` physical Omicron/spectrogram features + frozen CLIP embeddings + calibrated ImageNet `ViT-B/16` cut total test errors in half vs. RF (`28 → 14`) and by `33%` vs. `ViT-B/16` (`21 → 14`), pushing **every single one of the 14 classes above `0.909` F1** (`No_Glitch +0.0856`, `None_of_the_Above +0.0758`, `Extremely_Loud = 100%` recall).
+- **Zero-GPU-Fine-Tuning Breakthrough:** Even with **100% frozen** CLIP weights, our 2-branch Multimodal MLP (`Frozen CLIP + 34 Physics`) achieved **`0.9671` Macro-F1**, outperforming full GPU-fine-tuned `ViT-B/16` (`0.9608`)!
+- **Irreducible Bayes Label-Noise Floor (`0.53%`):** Only **`5 / 951` glitches** were missed by all 5 paradigms—and on **100% (`5/5`) of them**, RF, CNN, ViT, CLIP, and Hybrid Fusion unanimously predict the exact same alternative class.
 
 ---
 
-## 5. Repository Structure
+## 3. Option B: Bidirectional Cross-Detector Transfer & Few-Shot Recovery (5-Seed Mean ± Std)
+
+| Model (`H1 ↔ L1`, Seeds `42–46`) | `H1 → L1` (`0%`) | `H1 → L1` (`10%` / `20%`) | `L1 → H1` (`0%`) | `L1 → H1` (`10%` / `20%`) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Feature Random Forest (34 feats)** | $0.6355 \pm 0.0147$ | — | $0.7101 \pm 0.0101$ | — |
+| **Adapted Gravity Spy CNN (1.0s)** | $0.7357 \pm 0.0233$ | — | $0.7095 \pm 0.0347$ | — |
+| **Step 16 Frozen CLIP Linear Probe (CPU)** | $0.6806 \pm 0.0289$ | $0.8082$ / $0.8148$ | $0.7063 \pm 0.0229$ | $0.7921$ / $0.7748$ |
+| **Step 17 Multimodal Frozen CLIP + 34 Physics (CPU)** | $0.6908 \pm 0.0198$ | $0.8784$ / $0.8687$ | $0.7664 \pm 0.0166$ | $0.8541$ / **$0.8732$** |
+| **Step 15 Fine-Tuned ResNet-18 (Multi-View RGB)** | **$0.8512 \pm 0.0322$** | **$0.9168$ / $0.9426$** | **$0.7805 \pm 0.0276$** | **$0.8609$ / $0.8742$** |
+
+*Key Cross-Detector Takeaways:* Fine-tuning pretrained `ResNet-18 (Multi-View RGB)` closes **`91.7%`** of the `H1 → L1` domain gap using just `20%` (`351`) Livingston glitches (`0.8512 → 0.9426` vs. `0.9509` Native L1). Meanwhile, fusing **Frozen CLIP + 34 Physics Features on CPU** lifts `L1 → H1` zero-shot by `+0.060` (`0.7664`) and virtually ties GPU-fine-tuned `ResNet-18` at `20%` (`0.8732` vs. `0.8742`) with `3.6×` lower variance!
+
+---
+
+## 4. Repository Structure
 
 ```text
 AI Project/
@@ -81,19 +74,21 @@ AI Project/
 │   ├── features/    (extractor.py, metadata_features.py)
 │   ├── models/      (baselines.py, tree_models.py, cnn.py, transfer_models.py, vlm_models.py)
 │   ├── evaluation/  (metrics.py, plots.py, failure_analysis.py)
-│   └── experiments/ (run_baselines.py, run_tree_models.py, run_ablations.py, run_cnn.py, run_cross_detector.py, run_transfer_learning.py, run_vlm_clip.py)
+│   └── experiments/ (run_baselines.py, run_tree_models.py, run_ablations.py, run_cnn.py,
+│                     run_cross_detector.py, run_transfer_learning.py, run_vlm_clip.py, run_multimodal_fusion.py)
 ├── notebooks/
-│   ├── 01_data_and_detector_eda.ipynb          # Step 1: EDA & H1 vs L1 distribution analysis
-│   ├── 02_feature_verification.ipynb           # Step 4: Multi-view HDF5 & array verification
-│   ├── 03_baseline_and_tree_models.ipynb       # Steps 7-9: Baselines, Decision Tree & Random Forest
-│   ├── 04_cnn_training_colab.ipynb             # Steps 11-12: Adapted Gravity Spy CNN vs. Features
-│   ├── 05_cross_detector_evaluation.ipynb      # Step 13: Option B Cross-Detector Transfer (5 seeds)
-│   ├── 06_ablations_and_failure_analysis.ipynb # Steps 10 & 14: Feature Ablations & Visual Failure Analysis
-│   ├── 07_transfer_learning_colab.ipynb        # Step 15: Pretrained Vision Transfer & Few-Shot Adaptation
-│   └── 08_vlm_clip_colab.ipynb                 # Step 16: Vision-Language Models (OpenAI CLIP ViT-B/16)
+│   ├── 01_data_and_detector_eda.ipynb                  # Step 1: EDA & H1 vs L1 distribution analysis
+│   ├── 02_feature_verification.ipynb                   # Step 4: Multi-view HDF5 & array verification
+│   ├── 03_baseline_and_tree_models.ipynb               # Steps 7-9: Baselines, Decision Tree & Random Forest
+│   ├── 04_cnn_training_colab.ipynb                     # Steps 11-12: Adapted Gravity Spy CNN vs. Features
+│   ├── 05_cross_detector_evaluation.ipynb              # Step 13: Option B Cross-Detector Transfer (5 seeds)
+│   ├── 06_ablations_and_failure_analysis.ipynb         # Steps 10 & 14: Feature Ablations & Visual Failure Analysis
+│   ├── 07_transfer_learning_colab.ipynb                # Step 15: Pretrained Vision Transfer & Few-Shot Adaptation
+│   ├── 08_vlm_clip_colab.ipynb                         # Step 16: Vision-Language Models (OpenAI CLIP ViT-B/16)
+│   └── 09_multimodal_fusion_and_unified_analysis.ipynb # Step 17: Multimodal Physics-Vision Fusion & Unified Analysis
 ├── outputs/
-│   ├── figures/     # 18 publication-grade 300-DPI PNG visualizations
-│   ├── models/      # rf_best_model.joblib, clip_embeddings_frozen.npz (5.7 MB), clip_embeddings_finetuned.npz (5.7 MB)
-│   └── tables/      # All benchmark, tuning, ablation, cross-detector, transfer, VLM, and disagreement CSVs
+│   ├── figures/     # 21 publication-grade 300-DPI PNG visualizations
+│   ├── models/      # rf_best_model.joblib, clip_embeddings_*.npz, vit_b16_val_test_cache.npz
+│   └── tables/      # All benchmark, ablation, cross-detector, transfer, VLM, fusion & failure CSVs
 └── report/          # Final research paper & presentation assets
 ```

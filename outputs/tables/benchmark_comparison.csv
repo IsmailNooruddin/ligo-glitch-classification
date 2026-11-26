@@ -14,3 +14,7 @@ ViT-B/16 (Multi-View RGB),97.79,0.9608,0.9783,"ImageNet-pretrained Vision Transf
 CLIP ViT-B/16 Frozen Linear Probe,94.32,0.906,0.9431,"Tuned Multinomial Logistic Regression on frozen 512-dim CLIP RGB embeddings (7.2K params, 0 backbone FT)"
 CLIP ViT-B/16 Frozen MLP Probe,95.37,0.9271,0.9537,"2-layer PyTorch MLP on frozen 512-dim CLIP RGB embeddings (136K params, 9.4s train, Top-3=99.8%)"
 "CLIP ViT-B/16 Fine-Tuned (Text-Init, RGB)",96.95,0.9474,0.9697,"Prompt-initialized end-to-end fine-tuned OpenAI CLIP ViT-B/16 on Multi-View RGB (86.2M params, Top-3=99.8%)"
+Early Fusion MLP (Frozen CLIP + 34 Physics),97.79,0.9671,0.978,2-branch LayerNorm MLP fusing frozen 512d CLIP + 34 physics features (0 GPU fine-tuning!)
+Bi-Modal Late Fusion (Physics RF + ImageNet ViT-B/16),97.9,0.9649,0.9788,Calibrated log-linear fusion of Laplace-smoothed 34-feat RF + ImageNet ViT-B/16 (Val-tuned)
+Tri-Modal Hybrid Fusion (Physics RF + ImageNet ViT + CLIP),98.21,0.9684,0.9819,Calibrated tri-modal fusion of Physics RF + ImageNet ViT-B/16 + Fine-Tuned CLIP (Val-tuned)
+Hybrid Fusion (Early Physics-CLIP + ImageNet ViT-B/16),98.53,0.9736,0.9852,CHAMPION: Calibrated log-linear hybrid combining Early Frozen-CLIP+34-Physics MLP + ImageNet ViT-B/16 (14/951 errors)

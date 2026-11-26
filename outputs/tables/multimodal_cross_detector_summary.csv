@@ -1,0 +1,13 @@
+Config,Direction,Stage,Accuracy_Mean,Macro_F1_Mean,Macro_F1_Std,Violin_Mode_F1
+Frozen CLIP + All 34 Physics,H1->L1,0% (Zero-Shot Transfer),80.11,0.6908,0.0198,0.54
+Frozen CLIP + All 34 Physics,H1->L1,10% Few-Shot Adapted,93.74,0.8784,0.0328,1.0
+Frozen CLIP + All 34 Physics,H1->L1,20% Few-Shot Adapted,94.0,0.8687,0.0194,1.0
+Frozen CLIP + All 34 Physics,L1->H1,0% (Zero-Shot Transfer),87.86,0.7664,0.0166,0.9506
+Frozen CLIP + All 34 Physics,L1->H1,10% Few-Shot Adapted,93.46,0.8541,0.0126,0.941
+Frozen CLIP + All 34 Physics,L1->H1,20% Few-Shot Adapted,94.75,0.8732,0.0097,0.9386
+Frozen CLIP + 30 Detector-Invariant Physics,H1->L1,0% (Zero-Shot Transfer),75.28,0.6401,0.0164,0.0182
+Frozen CLIP + 30 Detector-Invariant Physics,H1->L1,10% Few-Shot Adapted,93.31,0.8708,0.0287,0.9951
+Frozen CLIP + 30 Detector-Invariant Physics,H1->L1,20% Few-Shot Adapted,93.69,0.8636,0.0291,0.9951
+Frozen CLIP + 30 Detector-Invariant Physics,L1->H1,0% (Zero-Shot Transfer),86.61,0.7463,0.011,0.808
+Frozen CLIP + 30 Detector-Invariant Physics,L1->H1,10% Few-Shot Adapted,92.83,0.8388,0.0118,0.8544
+Frozen CLIP + 30 Detector-Invariant Physics,L1->H1,20% Few-Shot Adapted,94.22,0.8681,0.0078,0.8421

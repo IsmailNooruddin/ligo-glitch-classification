@@ -1,0 +1,15 @@
+Class,Early Fusion Linear (Frozen CLIP + 34 Physics),Early Fusion MLP (Frozen CLIP + 34 Physics),Early Fusion Linear (Fine-Tuned CLIP + 34 Physics),Early Fusion MLP (Fine-Tuned CLIP + 34 Physics),Bi-Modal Late Fusion (Physics RF + ImageNet ViT-B/16),Hybrid Fusion (Early Physics-CLIP + ImageNet ViT-B/16),Tri-Modal Hybrid Fusion (Physics RF + ImageNet ViT + CLIP)
+Blip,0.9798,0.9927,0.9909,0.9873,0.9909,0.9963,0.9909
+Chirp,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+Extremely_Loud,0.9466,0.9778,0.9624,0.9552,0.9778,0.9853,0.9926
+Koi_Fish,0.9717,0.9811,0.9858,0.981,0.9953,0.9811,0.9906
+Low_Frequency_Burst,0.9681,0.9785,0.9724,0.9727,0.967,0.9838,0.978
+Low_Frequency_Lines,0.9466,0.9343,0.9265,0.913,0.9489,0.9559,0.9565
+No_Glitch,0.9362,0.8696,0.8333,0.75,0.8444,0.9091,0.8444
+None_of_the_Above,0.6667,0.9565,0.8182,0.8182,0.9091,0.9091,0.9091
+Power_Line,0.9925,0.9926,0.9926,1.0,1.0,0.9926,1.0
+Repeating_Blips,0.9351,0.961,0.9487,0.961,0.9231,0.9873,0.9351
+Scattered_Light,0.9778,0.9767,0.9925,0.9848,0.9848,0.9924,0.9924
+Scratchy,0.9903,0.9804,0.9901,0.9901,1.0,1.0,1.0
+Tomte,0.8571,0.9375,0.9677,0.9677,0.9677,0.9375,0.9677
+Violin_Mode,0.9919,1.0,1.0,0.9919,1.0,1.0,1.0

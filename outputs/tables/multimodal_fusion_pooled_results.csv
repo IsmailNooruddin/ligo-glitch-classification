@@ -1,0 +1,8 @@
+Model,Fusion_Level,Modalities,Val_Macro_F1,Accuracy (%),Macro-F1,Weighted-F1,Test_Errors,Config_Notes
+Early Fusion Linear (Frozen CLIP + 34 Physics),Early (Feature-Level),Frozen VLM + Physics,0.9507,96.64,0.94,0.9665,32,"alpha=2.5, C=50.0, cw=balanced"
+Early Fusion MLP (Frozen CLIP + 34 Physics),Early (Feature-Level),Frozen VLM + Physics,0.9597,97.79,0.9671,0.978,21,"2-branch LayerNorm MLP, Val-T=2.09"
+Early Fusion Linear (Fine-Tuned CLIP + 34 Physics),Early (Feature-Level),Fine-Tuned VLM + Physics,0.956,97.48,0.9558,0.9747,24,"alpha=2.5, C=15.0, cw=None"
+Early Fusion MLP (Fine-Tuned CLIP + 34 Physics),Early (Feature-Level),Fine-Tuned VLM + Physics,0.9568,96.95,0.9481,0.9697,29,"2-branch LayerNorm MLP, Val-T=2.48"
+Bi-Modal Late Fusion (Physics RF + ImageNet ViT-B/16),Late (Calibrated),Physics RF + ImageNet ViT,0.9652,97.9,0.9649,0.9788,20,"mode=log_linear, w=(RF=0.80, ViT=0.20)"
+Hybrid Fusion (Early Physics-CLIP + ImageNet ViT-B/16),Hybrid (Early + Late),Physics + CLIP + ImageNet ViT,0.9704,98.53,0.9736,0.9852,14,"early=Frozen CLIP + 34 Physics, mode=log_linear, w=(Early=0.65, ViT=0.35)"
+Tri-Modal Hybrid Fusion (Physics RF + ImageNet ViT + CLIP),Late (Tri-Modal),Physics RF + ImageNet ViT + CLIP,0.9634,98.21,0.9684,0.9819,17,"mode=log_linear, w=(RF=0.75, ViT=0.15, CLIP=0.10)"
