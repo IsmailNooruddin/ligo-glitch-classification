@@ -1,0 +1,15 @@
+Class,"CLIP ViT-B/16 Zero-Shot (Basic Prompts, RGB)","CLIP ViT-B/16 Zero-Shot (Physics Prompts, RGB)","CLIP ViT-B/16 Zero-Shot (Physics Prompts, 1.0s Viridis)",CLIP ViT-B/16 Frozen Linear Probe,CLIP ViT-B/16 Frozen MLP Probe,"CLIP ViT-B/16 Fine-Tuned (Text-Init, RGB)"
+Blip,0.0,0.5124,0.1269,0.9872,0.9909,0.9927
+Chirp,0.0,0.0,0.0,0.9412,1.0,1.0
+Extremely_Loud,0.0,0.0274,0.0,0.9552,0.9403,0.9474
+Koi_Fish,0.0,0.1311,0.2364,0.9717,0.9623,0.9765
+Low_Frequency_Burst,0.0,0.0,0.0,0.9215,0.9519,0.9667
+Low_Frequency_Lines,0.0,0.0,0.0263,0.8507,0.8489,0.9065
+No_Glitch,0.0,0.0,0.0,0.6957,0.7442,0.75
+None_of_the_Above,0.0,0.0,0.0,0.7826,0.8333,0.8182
+Power_Line,0.0,0.2321,0.0,0.9559,0.9701,1.0
+Repeating_Blips,0.0476,0.0714,0.0,0.9351,0.9351,0.961
+Scattered_Light,0.1396,0.4037,0.6415,0.9062,0.9375,0.9848
+Scratchy,0.0,0.3875,0.2734,0.9505,0.9903,1.0
+Tomte,0.0,0.1585,0.1299,0.8387,0.875,0.9677
+Violin_Mode,0.0,0.0185,0.0,0.9919,1.0,0.9919

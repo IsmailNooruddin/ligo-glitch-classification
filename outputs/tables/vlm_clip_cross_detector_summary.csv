@@ -1,0 +1,13 @@
+Direction,Stage,Avg_Target_Train_Samples,Accuracy_Mean (%),Accuracy_Std (%),Macro_F1_Mean,Macro_F1_Std,Gain_vs_SourceProbe,Num_Seeds
+H1->L1,0% (Text Zero-Shot),0,20.95,1.82,0.1346,0.0184,-0.546,5
+H1->L1,0% (Source Probe),0,79.21,2.55,0.6806,0.0289,0.0,5
+H1->L1,5% Adapted Probe,88,86.58,3.06,0.7589,0.0391,0.0783,5
+H1->L1,10% Adapted Probe,176,90.24,1.94,0.8082,0.0352,0.1276,5
+H1->L1,20% Adapted Probe,351,91.67,2.23,0.8148,0.0496,0.1343,5
+H1->L1,100% Native Target,1755,92.52,1.86,0.8988,0.0236,0.2182,5
+L1->H1,0% (Text Zero-Shot),0,27.16,2.03,0.1368,0.0199,-0.5695,5
+L1->H1,0% (Source Probe),0,84.42,1.27,0.7063,0.0229,0.0,5
+L1->H1,5% Adapted Probe,134,88.94,1.54,0.7736,0.0292,0.0673,5
+L1->H1,10% Adapted Probe,268,90.68,0.91,0.7921,0.0214,0.0859,5
+L1->H1,20% Adapted Probe,536,90.5,1.44,0.7748,0.0217,0.0686,5
+L1->H1,100% Native Target,2681,94.26,0.4,0.8709,0.0183,0.1647,5

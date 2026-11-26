@@ -1,0 +1,9 @@
+Model_Combination,Correct,Errors,Accuracy (%)
+Feature Random Forest (34 feats),923,28,97.06
+Adapted Gravity Spy CNN (1.0s),921,30,96.85
+CLIP ViT-B/16 Fine-Tuned (RGB),922,29,96.95
+ImageNet ViT-B/16 (RGB),930,21,97.79
+Oracle: ImageNet ViT + CLIP ViT,936,15,98.42
+Oracle: RF + CLIP ViT,939,12,98.74
+Oracle: RF + ImageNet ViT,944,7,99.26
+Oracle: RF + ImageNet ViT + CLIP ViT (All 4),945,6,99.37

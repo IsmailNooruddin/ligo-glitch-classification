@@ -1,0 +1,7 @@
+Model,Paradigm,Input_View,Trainable_Params,Val_Macro_F1,Accuracy (%),Top3_Accuracy (%),Macro-F1,Weighted-F1,Train_Time_Sec
+"CLIP ViT-B/16 Zero-Shot (Basic Prompts, RGB)",Zero-Shot (Basic),Multi-View RGB,0,,6.94,24.29,0.0134,0.0117,0.09
+"CLIP ViT-B/16 Zero-Shot (Physics Prompts, RGB)",Zero-Shot (Physics),Multi-View RGB,0,,26.08,64.46,0.1388,0.2355,0.07
+"CLIP ViT-B/16 Zero-Shot (Physics Prompts, 1.0s Viridis)",Zero-Shot (Physics),1.0s Viridis,0,,18.4,48.37,0.1025,0.1259,0.07
+CLIP ViT-B/16 Frozen Linear Probe,Frozen Linear Probe,Multi-View RGB,7182,0.903,94.32,99.58,0.906,0.9431,126.21
+CLIP ViT-B/16 Frozen MLP Probe,Frozen MLP Probe,Multi-View RGB,136462,0.9225,95.37,99.79,0.9271,0.9537,9.44
+"CLIP ViT-B/16 Fine-Tuned (Text-Init, RGB)",Text-Init Fine-Tuned,Multi-View RGB,86199809,0.9498,96.95,99.79,0.9474,0.9697,326.1
