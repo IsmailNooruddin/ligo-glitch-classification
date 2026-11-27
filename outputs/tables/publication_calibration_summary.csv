@@ -1,0 +1,6 @@
+Model,ECE_10bin,Test_NLL,Brier_Score
+Feature RF (34 feats),0.0649,0.2322,0.0697
+Adapted 4-Layer CNN (1.0s),0.0082,0.0911,0.0467
+ImageNet ViT-B/16 (Raw T=1.0),0.0174,0.1304,0.0411
+ImageNet ViT-B/16 (Calibrated T=1.60),0.0116,0.1033,0.0406
+Champion Hybrid Fusion,0.0102,0.0543,0.0243

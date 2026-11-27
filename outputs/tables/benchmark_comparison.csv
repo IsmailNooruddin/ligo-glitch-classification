@@ -3,6 +3,9 @@ Baseline 1: Majority Class,28.71,0.0319,0.1281,Always predicts 'Blip' (most comm
 Baseline 2: Raw-Pixel Decision Tree,82.75,0.7315,0.8394,"Decision Tree (max_depth=10) on 23,800 raw pixels (overfitting on pixel noise)"
 Feature-Based Decision Tree,91.59,0.8536,0.9152,"Tuned Decision Tree (max_depth=15, class_weight=None) on 34 engineered features"
 Feature-Based Random Forest,97.06,0.9376,0.9699,"Tuned Random Forest (n_est=50, max_depth=None, class_weight=None) on 34 engineered features"
+HistGradientBoosting (34 Physics Features),96.74,0.9336,0.9667,Val-tuned LightGBM-equivalent histogram GBDT on 34 physics features (confirming 0.934-0.938 tabular ceiling)
+ExtraTrees (34 Physics Features),96.85,0.9359,0.9673,Val-tuned 200-tree ExtraTrees ensemble on 34 physics features
+Physics-Only MLP (34 Physics Features),96.85,0.9362,0.9688,2-layer LayerNorm GELU MLP on 34 physics features (apples-to-apples ablation for Early Fusion MLP)
 Adapted Gravity Spy CNN (1.0s),96.85,0.9466,0.9682,4-block PyTorch CNN (adapted Glanzer et al. 2023) on 1.0s spectrograms with smoothed class weights
 ResNet-18 (1.0s Single-View),97.27,0.9543,0.9727,"ImageNet-pretrained ResNet-18 fine-tuned on 1.0s spectrograms (11.2M params, T4 GPU)"
 ResNet-18 (Multi-View RGB),97.16,0.9512,0.9716,"ImageNet-pretrained ResNet-18 with [0.5s, 1.0s, 2.0s] mapped to [R, G, B] channels (11.2M params)"

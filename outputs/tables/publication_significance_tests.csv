@@ -1,0 +1,9 @@
+Baseline_Model,Delta_Macro_F1,Delta_CI_Low,Delta_CI_High,Boot_p_one_sided,Boot_p_two_sided,Champ_Wins_n10,Base_Wins_n01,McNemar_Exact_p
+Feature-Based Decision Tree,0.1383,0.1041,0.1778,0.0,0.0,73,5,0.0
+Physics-Only MLP (34 feats),0.0374,0.0163,0.0648,0.001,0.002,22,6,0.0037
+Feature-Based Random Forest (34 feats),0.036,0.0138,0.0651,0.001,0.002,21,7,0.0125
+HistGradientBoosting (34 feats),0.04,0.0097,0.078,0.004,0.008,26,9,0.006
+Adapted Gravity Spy CNN (1.0s),0.027,0.0124,0.0449,0.0,0.0,20,4,0.0015
+CLIP ViT-B/16 Fine-Tuned (RGB),0.0262,0.0117,0.0449,0.0,0.0,18,3,0.0015
+ImageNet ViT-B/16 (Multi-View RGB),0.0128,-0.0018,0.0288,0.048,0.096,13,6,0.1671
+Early Fusion MLP (Frozen CLIP + Physics),0.0065,-0.0053,0.0162,0.115,0.23,8,1,0.0391

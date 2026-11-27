@@ -28,6 +28,7 @@ This project classifies transient noise artifacts ("glitches") in LIGO gravitati
 | **Baseline 2: Raw-Pixel Decision Tree** | $23,800$ raw pixels (`1.0s`) | $82.75\%$ | $0.7315$ | $0.8394$ |
 | **Model 1: Feature Decision Tree** | $34$ physical features | $91.59\%$ | $0.8536$ | $0.9152$ |
 | **Model 2: Feature Random Forest** | $34$ physical features | $97.06\%$ | $0.9376$ | $0.9699$ |
+| **Model 2b: HistGBDT / ExtraTrees / Physics MLP** | $34$ physical features | $96.74\%\text{–}96.85\%$ | $0.9336\text{–}0.9362$ | $0.9675\text{–}0.9685$ |
 | **Model 3: Adapted Gravity Spy CNN (1.0s)** | Scratch CNN `(1, 140, 170)` | $96.85\%$ | $0.9466$ | $0.9682$ |
 | **Model 4: CLIP Zero-Shot (Basic → Physics)** | VLM Text Only (`0` train imgs) | $6.94\% \to 26.08\%$ | $0.0134 \to 0.1388$ | $0.0117 \to 0.2355$ |
 | **Model 5: CLIP Frozen MLP Probe** | Frozen VLM + MLP (`9.4s`) | $95.37\%$ | $0.9271$ | $0.9537$ |
@@ -44,6 +45,7 @@ This project classifies transient noise artifacts ("glitches") in LIGO gravitati
 - **Multimodal Hybrid Fusion Breaks All Records (`0.9736` Macro-F1, `98.53%` Accuracy):** Combining `34` physical Omicron/spectrogram features + frozen CLIP embeddings + calibrated ImageNet `ViT-B/16` cut total test errors in half vs. RF (`28 → 14`) and by `33%` vs. `ViT-B/16` (`21 → 14`), pushing **every single one of the 14 classes above `0.909` F1** (`No_Glitch +0.0856`, `None_of_the_Above +0.0758`, `Extremely_Loud = 100%` recall).
 - **Zero-GPU-Fine-Tuning Breakthrough:** Even with **100% frozen** CLIP weights, our 2-branch Multimodal MLP (`Frozen CLIP + 34 Physics`) achieved **`0.9671` Macro-F1**, outperforming full GPU-fine-tuned `ViT-B/16` (`0.9608`)!
 - **Irreducible Bayes Label-Noise Floor (`0.53%`):** Only **`5 / 951` glitches** were missed by all 5 paradigms—and on **100% (`5/5`) of them**, RF, CNN, ViT, CLIP, and Hybrid Fusion unanimously predict the exact same alternative class.
+- **Publication-Readiness Rigor (Step 17.5):** 1,000-iteration paired bootstrap CIs (`Champion = 0.9736 [0.955, 0.989]`) & exact McNemar tests confirm statistically significant superiority over DT (`p < 0.0001`), 4-Layer CNN (`p < 0.001`), CLIP (`p < 0.001`), RF (`p = 0.002`), Physics MLP (`p = 0.002`), and HistGBDT (`p = 0.008`). Champion Fusion achieves the best calibration (`ECE = 0.0102`, `NLL = 0.0543`, `Brier = 0.0243`), reaching **`99.67%` automated accuracy** when routing just **`5%`** lowest-confidence glitches to human volunteers (and **`100.00%`** at `15%`). Block-4 Grad-CAM & `t-SNE` visually confirm physically grounded attention and `H1`/`L1` sub-cluster shifts in `Violin_Mode`.
 
 ---
 
@@ -74,8 +76,8 @@ AI Project/
 │   ├── features/    (extractor.py, metadata_features.py)
 │   ├── models/      (baselines.py, tree_models.py, cnn.py, transfer_models.py, vlm_models.py)
 │   ├── evaluation/  (metrics.py, plots.py, failure_analysis.py)
-│   └── experiments/ (run_baselines.py, run_tree_models.py, run_ablations.py, run_cnn.py,
-│                     run_cross_detector.py, run_transfer_learning.py, run_vlm_clip.py, run_multimodal_fusion.py)
+│   └── experiments/ (run_baselines.py, run_tree_models.py, run_ablations.py, run_cnn.py, run_cross_detector.py,
+│                     run_transfer_learning.py, run_vlm_clip.py, run_multimodal_fusion.py, run_publication_rigor.py)
 ├── notebooks/
 │   ├── 01_data_and_detector_eda.ipynb                  # Step 1: EDA & H1 vs L1 distribution analysis
 │   ├── 02_feature_verification.ipynb                   # Step 4: Multi-view HDF5 & array verification
@@ -85,9 +87,9 @@ AI Project/
 │   ├── 06_ablations_and_failure_analysis.ipynb         # Steps 10 & 14: Feature Ablations & Visual Failure Analysis
 │   ├── 07_transfer_learning_colab.ipynb                # Step 15: Pretrained Vision Transfer & Few-Shot Adaptation
 │   ├── 08_vlm_clip_colab.ipynb                         # Step 16: Vision-Language Models (OpenAI CLIP ViT-B/16)
-│   └── 09_multimodal_fusion_and_unified_analysis.ipynb # Step 17: Multimodal Physics-Vision Fusion & Unified Analysis
+│   └── 09_multimodal_fusion_and_unified_analysis.ipynb # Steps 17 & 17.5: Multimodal Fusion, Rigor & Interpretability
 ├── outputs/
-│   ├── figures/     # 21 publication-grade 300-DPI PNG visualizations
+│   ├── figures/     # 25 publication-grade 300-DPI PNG visualizations
 │   ├── models/      # rf_best_model.joblib, clip_embeddings_*.npz, vit_b16_val_test_cache.npz
 │   └── tables/      # All benchmark, ablation, cross-detector, transfer, VLM, fusion & failure CSVs
 └── report/          # Final research paper & presentation assets

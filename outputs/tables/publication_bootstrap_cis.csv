@@ -1,0 +1,10 @@
+Model,Accuracy (%),Acc_CI_Low,Acc_CI_High,Macro_F1,Macro_F1_CI_Low,Macro_F1_CI_High,Test_Errors
+Feature-Based Decision Tree,91.38,89.59,93.06,0.8353,0.7949,0.8679,82
+Physics-Only MLP (34 feats),96.85,95.69,97.9,0.9362,0.9036,0.9604,30
+Feature-Based Random Forest (34 feats),97.06,96.0,98.11,0.9376,0.907,0.9612,28
+HistGradientBoosting (34 feats),96.74,95.58,97.69,0.9336,0.9022,0.9566,31
+Adapted Gravity Spy CNN (1.0s),96.85,95.79,97.9,0.9466,0.923,0.9667,30
+CLIP ViT-B/16 Fine-Tuned (RGB),96.95,95.79,97.9,0.9474,0.9222,0.9658,29
+ImageNet ViT-B/16 (Multi-View RGB),97.79,96.85,98.63,0.9608,0.9415,0.9778,21
+Early Fusion MLP (Frozen CLIP + Physics),97.79,96.95,98.74,0.9671,0.9491,0.9825,21
+Champion Hybrid Fusion (Physics-CLIP + ViT),98.53,97.79,99.26,0.9736,0.9551,0.9887,14

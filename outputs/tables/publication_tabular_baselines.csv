@@ -1,0 +1,4 @@
+Model,Val_Macro_F1,Accuracy (%),Macro-F1,Weighted-F1,Config
+HistGradientBoosting (34 Physics Features),0.9105,96.74,0.9336,0.9667,"{'lr': 0.1, 'max_depth': 6, 'l2': 1.0}"
+ExtraTrees (34 Physics Features),0.8869,96.85,0.9359,0.9673,"{'n_est': 200, 'max_depth': 25, 'cw': None}"
+Physics-Only MLP (34 Physics Features),0.9433,96.85,0.9362,0.9688,34->128->64->14 LayerNorm GELU MLP
